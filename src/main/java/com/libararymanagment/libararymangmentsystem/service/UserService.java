@@ -1,6 +1,7 @@
 package com.libararymanagment.libararymangmentsystem.service;
 
 
+import com.libararymanagment.libararymangmentsystem.DTO.UserDTO;
 
 import com.libararymanagment.libararymangmentsystem.entity.User;
 import com.libararymanagment.libararymangmentsystem.repository.UserRepository;
@@ -17,12 +18,10 @@ public class UserService {
         this.repository = repository;
     }
 
-
     // GET ALL
     public List<User> getAllUsers() {
         return repository.findAll();
     }
-
 
     // GET BY ID
     public User getUserById(Long id) {
@@ -30,38 +29,37 @@ public class UserService {
                 .orElseThrow(() -> new RuntimeException("User not found"));
     }
 
-
     // CREATE
-    public User saveUser(User user) {
+    public User saveUser(UserDTO dto) {
+        User user = new User();
+
+        user.setUsername(dto.getUsername());
+        user.setEmail(dto.getEmail());
+        user.setPassword(dto.getPassword());
+
         return repository.save(user);
     }
 
-
     // UPDATE
-    public User updateUser(Long id, User user) {
-
-        User oldUser = repository.findById(id)
-                .orElseThrow(() -> new RuntimeException("User not found"));
-
-        oldUser.setUsername(user.getUsername());
-        oldUser.setEmail(user.getEmail());
-        oldUser.setPassword(user.getPassword());
-        oldUser.setRole(user.getRole());
-
-        return repository.save(oldUser);
-    }
-
-
-    // DELETE
-    public String deleteUser(Long id) {
+    public User updateUser(Long id, UserDTO dto) {
 
         User user = repository.findById(id)
                 .orElseThrow(() -> new RuntimeException("User not found"));
 
-        repository.delete(user);
+        user.setUsername(dto.getUsername());
+        user.setEmail(dto.getEmail());
+        user.setPassword(dto.getPassword());
+        user.setRole(dto.getRole());
 
-        return "User deleted successfully";
+        return repository.save(user);
+    }
+
+    // DELETE
+    public void deleteUser(Long id) {
+        repository.deleteById(id);
     }
 }
+
+
 
 
