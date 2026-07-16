@@ -2,38 +2,92 @@ package com.libararymanagment.libararymangmentsystem.controller;
 
 
 
-import com.libararymanagment.libararymangmentsystem.entity.Author;
+
+import com.libararymanagment.libararymangmentsystem.DTO.AuthorRequest;
+import com.libararymanagment.libararymangmentsystem.DTO.AuthorResponse;
 import com.libararymanagment.libararymangmentsystem.service.AuthorService;
 
+import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+
 
 @RestController
 @RequestMapping("/api/authors")
 @CrossOrigin("*")
 public class AuthorController {
 
+
     private final AuthorService service;
+
 
     public AuthorController(AuthorService service) {
         this.service = service;
     }
 
+
+
+
+    // GET ALL AUTHORS
     @GetMapping
-    public List<Author> getAllAuthors() {
+    public List<AuthorResponse> getAllAuthors() {
+
         return service.getAllAuthors();
     }
 
-    @PostMapping
-    public Author saveAuthor(
-            @RequestBody Author author) {
-        return service.saveAuthor(author);
+
+
+
+
+    // GET AUTHOR BY ID
+    @GetMapping("/{id}")
+    public AuthorResponse getAuthorById(
+            @PathVariable Long id) {
+
+        return service.getAuthorById(id);
     }
 
-    @DeleteMapping("/{id}")
-    public void deleteAuthor(
-            @PathVariable Long id) {
-        service.deleteAuthor(id);
+
+
+
+
+    // CREATE AUTHOR
+    @PostMapping
+    public AuthorResponse saveAuthor(
+            @Valid @RequestBody AuthorRequest request) {
+
+        return service.saveAuthor(request);
     }
+
+
+
+
+
+    // UPDATE AUTHOR
+    @PutMapping("/{id}")
+    public AuthorResponse updateAuthor(
+            @PathVariable Long id,
+            @Valid @RequestBody AuthorRequest request) {
+
+        return service.updateAuthor(id, request);
+    }
+
+
+
+
+
+    // DELETE AUTHOR
+    @DeleteMapping("/{id}")
+    public String deleteAuthor(
+            @PathVariable Long id) {
+
+        service.deleteAuthor(id);
+
+        return "Author deleted successfully";
+    }
+
 }
+
+
+

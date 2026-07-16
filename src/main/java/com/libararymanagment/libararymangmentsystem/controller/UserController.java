@@ -2,8 +2,9 @@ package com.libararymanagment.libararymangmentsystem.controller;
 
 
 
-import com.libararymanagment.libararymangmentsystem.DTO.UserDTO;
 
+
+import com.libararymanagment.libararymangmentsystem.DTO.UserRequest;
 import com.libararymanagment.libararymangmentsystem.entity.User;
 import com.libararymanagment.libararymangmentsystem.service.UserService;
 import jakarta.validation.Valid;
@@ -36,7 +37,7 @@ public class UserController {
 
     // CREATE USER
     @PostMapping
-    public User saveUser( @Valid @RequestBody UserDTO dto) {
+    public User saveUser( @Valid @RequestBody UserRequest dto) {
         return service.saveUser(dto);
     }
 
@@ -44,7 +45,7 @@ public class UserController {
     @PutMapping("/{id}")
     public User updateUser(
             @PathVariable Long id,
-            @RequestBody UserDTO dto) {
+            @RequestBody UserRequest dto) {
         return service.updateUser(id, dto);
     }
 

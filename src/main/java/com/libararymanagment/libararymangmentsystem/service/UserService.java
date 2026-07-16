@@ -1,8 +1,10 @@
 package com.libararymanagment.libararymangmentsystem.service;
 
 
-import com.libararymanagment.libararymangmentsystem.DTO.UserDTO;
 
+
+import com.libararymanagment.libararymangmentsystem.DTO.UserRequest;
+import com.libararymanagment.libararymangmentsystem.EXception.UserAlreadyExistsException;
 import com.libararymanagment.libararymangmentsystem.entity.User;
 import com.libararymanagment.libararymangmentsystem.repository.UserRepository;
 import org.springframework.stereotype.Service;
@@ -29,19 +31,25 @@ public class UserService {
                 .orElseThrow(() -> new RuntimeException("User not found"));
     }
 
-    // CREATE
-    public User saveUser(UserDTO dto) {
+
+    public User saveUser(UserRequest dto) {
+
+        if (repository.existsByEmail(dto.getEmail())) {
+            throw new UserAlreadyExistsException("Email already exists");
+        }
+
         User user = new User();
 
         user.setUsername(dto.getUsername());
         user.setEmail(dto.getEmail());
         user.setPassword(dto.getPassword());
+        user.setRole(dto.getRole());
 
         return repository.save(user);
     }
 
     // UPDATE
-    public User updateUser(Long id, UserDTO dto) {
+    public User updateUser(Long id, UserRequest dto) {
 
         User user = repository.findById(id)
                 .orElseThrow(() -> new RuntimeException("User not found"));
