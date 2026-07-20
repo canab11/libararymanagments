@@ -1,10 +1,10 @@
 package com.libararymanagment.libararymangmentsystem.controller;
 
-
-import com.libararymanagment.libararymangmentsystem.DTO.FineRequest;
-import com.libararymanagment.libararymangmentsystem.DTO.FineResponse;
+import com.libararymanagment.libararymangmentsystem.dto.FineRequest;
+import com.libararymanagment.libararymangmentsystem.dto.FineResponse;
 import com.libararymanagment.libararymangmentsystem.service.FineService;
 import jakarta.validation.Valid;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -12,6 +12,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/fines")
 @CrossOrigin("*")
+@PreAuthorize("hasRole('ADMIN')")
 public class FineController {
 
     private final FineService service;

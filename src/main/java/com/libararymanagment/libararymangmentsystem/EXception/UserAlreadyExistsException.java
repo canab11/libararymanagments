@@ -1,4 +1,4 @@
-package com.libararymanagment.libararymangmentsystem.EXception;
+package com.libararymanagment.libararymangmentsystem.exception;
 
 public class UserAlreadyExistsException extends RuntimeException {
     public UserAlreadyExistsException(

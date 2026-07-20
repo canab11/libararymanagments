@@ -1,9 +1,17 @@
 package com.libararymanagment.libararymangmentsystem.entity;
 
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.NoArgsConstructor;
+import lombok.AllArgsConstructor;
 
 @Entity
 @Table(name = "genres")
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class Genre {
 
     @Id
@@ -11,24 +19,4 @@ public class Genre {
     private Long genreId;
 
     private String genreName;
-    public Genre() {
-    }
-
-    public Long getGenreId() {
-        return genreId;
-    }
-
-    public void setGenreId(Long genreId) {
-        this.genreId = genreId;
-    }
-
-    public String getGenreName() {
-        return genreName;
-    }
-
-    public void setGenreName(String genreName) {
-        this.genreName = genreName;
-    }
-
-
 }

@@ -1,10 +1,7 @@
 package com.libararymanagment.libararymangmentsystem.service;
 
-
-
-
-import com.libararymanagment.libararymangmentsystem.DTO.UserRequest;
-import com.libararymanagment.libararymangmentsystem.EXception.UserAlreadyExistsException;
+import com.libararymanagment.libararymangmentsystem.dto.UserRequest;
+import com.libararymanagment.libararymangmentsystem.exception.UserAlreadyExistsException;
 import com.libararymanagment.libararymangmentsystem.entity.User;
 import com.libararymanagment.libararymangmentsystem.repository.UserRepository;
 import org.springframework.stereotype.Service;
@@ -15,9 +12,11 @@ import java.util.List;
 public class UserService {
 
     private final UserRepository repository;
+    private final org.springframework.security.crypto.password.PasswordEncoder passwordEncoder;
 
-    public UserService(UserRepository repository) {
+    public UserService(UserRepository repository, org.springframework.security.crypto.password.PasswordEncoder passwordEncoder) {
         this.repository = repository;
+        this.passwordEncoder = passwordEncoder;
     }
 
     // GET ALL
@@ -31,7 +30,6 @@ public class UserService {
                 .orElseThrow(() -> new RuntimeException("User not found"));
     }
 
-
     public User saveUser(UserRequest dto) {
 
         if (repository.existsByEmail(dto.getEmail())) {
@@ -42,7 +40,7 @@ public class UserService {
 
         user.setUsername(dto.getUsername());
         user.setEmail(dto.getEmail());
-        user.setPassword(dto.getPassword());
+        user.setPassword(passwordEncoder.encode(dto.getPassword()));
         user.setRole(dto.getRole());
 
         return repository.save(user);
@@ -56,7 +54,7 @@ public class UserService {
 
         user.setUsername(dto.getUsername());
         user.setEmail(dto.getEmail());
-        user.setPassword(dto.getPassword());
+        user.setPassword(passwordEncoder.encode(dto.getPassword()));
         user.setRole(dto.getRole());
 
         return repository.save(user);
@@ -67,7 +65,4 @@ public class UserService {
         repository.deleteById(id);
     }
 }
-
-
-
 

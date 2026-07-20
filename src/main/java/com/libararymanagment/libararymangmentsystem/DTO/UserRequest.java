@@ -1,6 +1,4 @@
-package com.libararymanagment.libararymangmentsystem.DTO;
-
-
+package com.libararymanagment.libararymangmentsystem.dto;
 
 import com.libararymanagment.libararymangmentsystem.entity.Role;
 import jakarta.validation.constraints.Email;

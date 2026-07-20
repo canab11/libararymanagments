@@ -1,7 +1,5 @@
 package com.libararymanagment.libararymangmentsystem.repository;
 
-
-
 import com.libararymanagment.libararymangmentsystem.entity.Book;
 import org.springframework.data.jpa.repository.JpaRepository;
 
@@ -16,7 +14,4 @@ public interface BookRepository extends JpaRepository<Book, Long> {
     List<Book> findByGenreGenreNameContainingIgnoreCase(String genre);
 
 }
-
-
-
 

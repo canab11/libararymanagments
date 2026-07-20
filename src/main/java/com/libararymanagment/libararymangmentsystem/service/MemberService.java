@@ -1,9 +1,7 @@
 package com.libararymanagment.libararymangmentsystem.service;
 
-
-
-import com.libararymanagment.libararymangmentsystem.DTO.MemberRequest;
-import com.libararymanagment.libararymangmentsystem.DTO.MemberResponse;
+import com.libararymanagment.libararymangmentsystem.dto.MemberRequest;
+import com.libararymanagment.libararymangmentsystem.dto.MemberResponse;
 import com.libararymanagment.libararymangmentsystem.entity.Member;
 import com.libararymanagment.libararymangmentsystem.repository.MemberRepository;
 
@@ -22,7 +20,6 @@ public class MemberService {
         this.repository = repository;
     }
 
-
     // GET ALL
     public List<MemberResponse> getAllMembers() {
 
@@ -31,7 +28,6 @@ public class MemberService {
                 .map(this::mapToResponse)
                 .collect(Collectors.toList());
     }
-
 
     // CREATE
     public MemberResponse saveMember(MemberRequest request) {
@@ -49,12 +45,10 @@ public class MemberService {
         return mapToResponse(savedMember);
     }
 
-
     // DELETE
     public void deleteMember(Long id) {
         repository.deleteById(id);
     }
-
 
     // Entity -> Response
     private MemberResponse mapToResponse(Member member) {

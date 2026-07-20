@@ -1,7 +1,7 @@
 package com.libararymanagment.libararymangmentsystem.service;
 
-import com.libararymanagment.libararymangmentsystem.DTO.FineRequest;
-import com.libararymanagment.libararymangmentsystem.DTO.FineResponse;
+import com.libararymanagment.libararymangmentsystem.dto.FineRequest;
+import com.libararymanagment.libararymangmentsystem.dto.FineResponse;
 import com.libararymanagment.libararymangmentsystem.entity.BorrowRecord;
 import com.libararymanagment.libararymangmentsystem.entity.Fine;
 import com.libararymanagment.libararymangmentsystem.repository.BorrowRecordRepository;

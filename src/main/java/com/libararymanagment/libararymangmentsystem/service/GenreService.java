@@ -1,8 +1,7 @@
 package com.libararymanagment.libararymangmentsystem.service;
 
-
-import com.libararymanagment.libararymangmentsystem.DTO.GenreRequest;
-import com.libararymanagment.libararymangmentsystem.DTO.GenreResponse;
+import com.libararymanagment.libararymangmentsystem.dto.GenreRequest;
+import com.libararymanagment.libararymangmentsystem.dto.GenreResponse;
 import com.libararymanagment.libararymangmentsystem.entity.Genre;
 import com.libararymanagment.libararymangmentsystem.repository.GenreRepository;
 
@@ -20,7 +19,6 @@ public class GenreService {
         this.repository = repository;
     }
 
-
     // GET ALL
     public List<GenreResponse> getAllGenres() {
 
@@ -29,7 +27,6 @@ public class GenreService {
                 .map(this::convertToResponse)
                 .collect(Collectors.toList());
     }
-
 
     // CREATE
     public GenreResponse saveGenre(GenreRequest request) {
@@ -43,14 +40,11 @@ public class GenreService {
         return convertToResponse(savedGenre);
     }
 
-
     // DELETE
     public void deleteGenre(Long id) {
 
         repository.deleteById(id);
     }
-
-
 
     // Entity -> Response
     private GenreResponse convertToResponse(Genre genre) {
@@ -63,5 +57,4 @@ public class GenreService {
         return response;
     }
 }
-
 

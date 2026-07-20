@@ -1,12 +1,11 @@
 package com.libararymanagment.libararymangmentsystem.controller;
 
-
-
-import com.libararymanagment.libararymangmentsystem.DTO.BorrowRecordRequest;
-import com.libararymanagment.libararymangmentsystem.DTO.BorrowRecordResponse;
+import com.libararymanagment.libararymangmentsystem.dto.BorrowRecordRequest;
+import com.libararymanagment.libararymangmentsystem.dto.BorrowRecordResponse;
 import com.libararymanagment.libararymangmentsystem.service.BorrowRecordService;
 
 import jakarta.validation.Valid;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -14,6 +13,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/borrow-records")
 @CrossOrigin("*")
+@PreAuthorize("hasRole('ADMIN')")
 public class BorrowRecordController {
 
     private final BorrowRecordService service;
@@ -48,6 +48,11 @@ public class BorrowRecordController {
 
         return "Borrow Record deleted successfully";
     }
+    @GetMapping("/overdue")
+    public List<BorrowRecordResponse> getOverdue() {
+        return service.getOverdueRecords();
+    }
+
     @PutMapping("/{id}/return")
     public BorrowRecordResponse returnBook(
             @PathVariable Long id) {

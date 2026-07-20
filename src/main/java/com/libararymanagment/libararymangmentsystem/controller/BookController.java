@@ -1,11 +1,11 @@
 package com.libararymanagment.libararymangmentsystem.controller;
 
-
-import com.libararymanagment.libararymangmentsystem.DTO.BookRequest;
-import com.libararymanagment.libararymangmentsystem.DTO.BookResponse;
+import com.libararymanagment.libararymangmentsystem.dto.BookRequest;
+import com.libararymanagment.libararymangmentsystem.dto.BookResponse;
 import com.libararymanagment.libararymangmentsystem.service.BookService;
 
 import jakarta.validation.Valid;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -17,12 +17,9 @@ public class BookController {
 
     private final BookService service;
 
-
     public BookController(BookService service) {
         this.service = service;
     }
-
-
 
     // GET ALL BOOKS
     @GetMapping
@@ -30,8 +27,6 @@ public class BookController {
 
         return service.getAllBooks();
     }
-
-
 
     // GET BOOK BY ID
     @GetMapping("/{id}")
@@ -41,9 +36,8 @@ public class BookController {
         return service.getBookById(id);
     }
 
-
-
     // CREATE BOOK
+    @PreAuthorize("hasRole('ADMIN')")
     @PostMapping
     public BookResponse saveBook(
             @Valid @RequestBody BookRequest request) {
@@ -51,9 +45,8 @@ public class BookController {
         return service.saveBook(request);
     }
 
-
-
     // UPDATE BOOK
+    @PreAuthorize("hasRole('ADMIN')")
     @PutMapping("/{id}")
     public BookResponse updateBook(
             @PathVariable Long id,
@@ -62,9 +55,8 @@ public class BookController {
         return service.updateBook(id, request);
     }
 
-
-
     // DELETE BOOK
+    @PreAuthorize("hasRole('ADMIN')")
     @DeleteMapping("/{id}")
     public String deleteBook(
             @PathVariable Long id) {
@@ -74,9 +66,6 @@ public class BookController {
         return "Book deleted successfully";
     }
 
-
-
-
     // SEARCH BY TITLE
     @GetMapping("/search/title")
     public List<BookResponse> searchByTitle(
@@ -85,9 +74,6 @@ public class BookController {
         return service.searchByTitle(title);
     }
 
-
-
-
     // SEARCH BY AUTHOR
     @GetMapping("/search/author")
     public List<BookResponse> searchByAuthor(
@@ -95,9 +81,6 @@ public class BookController {
 
         return service.searchByAuthor(author);
     }
-
-
-
 
     // SEARCH BY GENRE
     @GetMapping("/search/genre")
@@ -108,9 +91,4 @@ public class BookController {
     }
 
 }
-
-
-
-
-
 

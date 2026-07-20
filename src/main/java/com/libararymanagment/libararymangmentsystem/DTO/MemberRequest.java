@@ -1,5 +1,4 @@
-package com.libararymanagment.libararymangmentsystem.DTO;
-
+package com.libararymanagment.libararymangmentsystem.dto;
 
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;

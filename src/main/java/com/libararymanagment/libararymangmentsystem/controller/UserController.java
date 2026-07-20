@@ -1,10 +1,6 @@
 package com.libararymanagment.libararymangmentsystem.controller;
 
-
-
-
-
-import com.libararymanagment.libararymangmentsystem.DTO.UserRequest;
+import com.libararymanagment.libararymangmentsystem.dto.UserRequest;
 import com.libararymanagment.libararymangmentsystem.entity.User;
 import com.libararymanagment.libararymangmentsystem.service.UserService;
 import jakarta.validation.Valid;
@@ -56,6 +52,4 @@ public class UserController {
         return "User deleted successfully";
     }
 }
-
-
 

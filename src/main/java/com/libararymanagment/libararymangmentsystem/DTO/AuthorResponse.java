@@ -1,12 +1,9 @@
-package com.libararymanagment.libararymangmentsystem.DTO;
-
-
+package com.libararymanagment.libararymangmentsystem.dto;
 
 import lombok.Data;
 
 @Data
 public class AuthorResponse {
-
 
     private Long authorId;
 
